@@ -1,3 +1,4 @@
+using Commander.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -9,7 +10,7 @@ namespace Commander
     {
         public Startup(IConfiguration configuration)
         {
-            configuration = configuration;
+            Configuration = configuration;
         }
         public IConfiguration Configuration { get; }
 
@@ -17,6 +18,8 @@ namespace Commander
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+
+            services.AddScoped<ICommanderRepo, MockCommanderRepo>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
